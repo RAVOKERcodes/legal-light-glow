@@ -29,7 +29,7 @@ const practices = [
   { icon: BookOpen, title: "Criminal Aspects of Family Law", desc: "498A, cruelty, dowry-related proceedings." },
   { icon: FileText, title: "Succession & Inheritance", desc: "Wills, probate, letters of administration." },
   { icon: Users, title: "Family Settlements", desc: "Mediation and structured family agreements." },
-  { icon: Home, title: "Property & Probate", desc: "Property disputes, estate planning, due diligence." },
+  { icon: HomeIcon, title: "Property & Probate", desc: "Property disputes, estate planning, due diligence." },
 ];
 
 function Home() {
