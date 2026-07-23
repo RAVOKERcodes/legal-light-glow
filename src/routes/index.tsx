@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Scale, Gavel, Users, Shield, Home as HomeIcon, BookOpen, Baby, FileText, Mail, Phone, MapPin } from "lucide-react";
+import { Scale, Gavel, Users, Shield, Home as HomeIcon, BookOpen, Baby, FileText, Mail, Phone, MapPin, ArrowDown } from "lucide-react";
+import { BackToTop } from "@/components/BackToTop";
 import alkaAsset from "@/assets/alka.png.asset.json";
 import { Disclaimer } from "@/components/Disclaimer";
 
@@ -69,21 +70,42 @@ function Home() {
             allow="autoplay; encrypted-media"
             frameBorder={0}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
-          <div className="absolute inset-0 bg-primary/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background" />
+          <div className="absolute inset-0 bg-primary/50" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--background)_85%)]" />
         </div>
 
         <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-6 text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/50 bg-background/40 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-gold backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Advocate · Supreme Court of India
-          </span>
-          <h1 className="max-w-4xl font-serif text-5xl font-medium leading-[1.05] text-primary-foreground sm:text-6xl md:text-7xl">
-            Advocate <span className="italic text-gold">Alka Nupur Singh</span>
-          </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg">
-            A boutique chambers offering focused counsel in divorce, family law and civil litigation across
-            Delhi NCR — with over 12 years of courtroom experience.
-          </p>
+          <div className="rounded-2xl bg-background/40 px-6 py-8 shadow-2xl shadow-primary/10 backdrop-blur-md sm:px-10 sm:py-10">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/60 bg-background/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-gold">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Advocate · Supreme Court of India
+            </span>
+            <h1
+              className="max-w-4xl font-serif text-5xl font-semibold leading-[1.05] text-primary-foreground sm:text-6xl md:text-7xl"
+              style={{ textShadow: "0 2px 24px color-mix(in oklab, var(--primary) 25%, transparent)" }}
+            >
+              Advocate <span className="italic text-gold">Alka Nupur Singh</span>
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-base font-medium leading-relaxed text-primary-foreground/90 sm:text-lg">
+              A boutique chambers offering focused counsel in divorce, family law and civil litigation across
+              Delhi NCR — with over 12 years of courtroom experience.
+            </p>
+
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <a
+                href="#contact"
+                className="rounded-md bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary shadow-lg shadow-gold/20 transition-transform hover:-translate-y-0.5 hover:opacity-90"
+              >
+                Book Consultation
+              </a>
+              <a
+                href="#practice"
+                className="rounded-md border-2 border-primary-foreground/40 bg-background/20 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground backdrop-blur-sm transition-colors hover:border-gold/60 hover:bg-background/30"
+              >
+                Practice Areas
+              </a>
+            </div>
+          </div>
 
           <div className="relative mt-10">
             <div className="absolute inset-x-6 bottom-0 top-8 -z-10 rounded-t-full bg-gradient-to-b from-gold/30 to-transparent blur-2xl" />
@@ -93,22 +115,16 @@ function Home() {
               className="mx-auto h-[420px] w-auto object-contain drop-shadow-2xl sm:h-[520px]"
             />
           </div>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a
-              href="#contact"
-              className="rounded-md bg-gold px-6 py-3 text-sm font-medium uppercase tracking-wider text-primary hover:opacity-90"
-            >
-              Book Consultation
-            </a>
-            <a
-              href="#practice"
-              className="rounded-md border border-primary-foreground/30 bg-background/10 px-6 py-3 text-sm font-medium uppercase tracking-wider text-primary-foreground backdrop-blur hover:bg-background/20"
-            >
-              Practice Areas
-            </a>
-          </div>
         </div>
+
+        <a
+          href="#about"
+          className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-gold"
+          aria-label="Scroll to about section"
+        >
+          <span>Scroll</span>
+          <ArrowDown className="h-4 w-4 animate-bounce" />
+        </a>
       </section>
 
       {/* ABOUT */}
@@ -242,6 +258,7 @@ function Home() {
       </footer>
 
       <Disclaimer />
+      <BackToTop />
     </div>
   );
 }
