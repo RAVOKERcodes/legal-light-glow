@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Scale, Gavel, Users, Shield, Home, BookOpen, Baby, FileText, Mail, Phone, MapPin } from "lucide-react";
+import { Scale, Gavel, Users, Shield, Home as HomeIcon, BookOpen, Baby, FileText, Mail, Phone, MapPin } from "lucide-react";
 import alkaAsset from "@/assets/alka.png.asset.json";
 import { Disclaimer } from "@/components/Disclaimer";
 
