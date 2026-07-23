@@ -258,6 +258,7 @@ function Home() {
       </footer>
 
       <Disclaimer />
+      <BackToTop />
     </div>
   );
 }
