@@ -2,20 +2,25 @@
 @source "../src";
 @import "tw-animate-css";
 
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-serif: "Cormorant Garamond", serif;
-  --font-sans: "Inter", sans-serif;
+  --font-display: "Instrument Serif", "Cormorant Garamond", serif;
+  --font-serif: "Instrument Serif", "Cormorant Garamond", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 6px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--card-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -24,38 +29,356 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-gold: var(--gold);
-  --color-gold-soft: var(--gold-soft);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+
+  --color-brass: var(--brass);
+  --color-brass-soft: var(--brass-soft);
+  --color-brass-deep: var(--brass-deep);
+  --color-sage: var(--sage);
+  --color-ink: var(--ink);
+  --color-elevated: var(--elevated);
+  --color-gold: var(--brass); /* legacy alias */
+
   --color-border: var(--border);
   --color-ring: var(--ring);
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.98 0.005 80);
-  --foreground: oklch(0.18 0.02 40);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 40);
-  --primary: oklch(0.22 0.02 40);
-  --primary-foreground: oklch(0.98 0.005 80);
-  --secondary: oklch(0.94 0.01 80);
-  --secondary-foreground: oklch(0.22 0.02 40);
-  --muted: oklch(0.94 0.01 80);
-  --muted-foreground: oklch(0.45 0.02 40);
-  --accent: oklch(0.72 0.12 75);
-  --accent-foreground: oklch(0.18 0.02 40);
-  --gold: oklch(0.72 0.12 75);
-  --gold-soft: oklch(0.82 0.08 80);
-  --border: oklch(0.88 0.01 80);
-  --ring: oklch(0.72 0.12 75);
+  /* Native controls (select popups, form widgets) follow the light theme */
+  color-scheme: light;
+
+  --radius: 0.75rem;
+
+  /* Pure neutral grayscale — white surfaces, black text, grey for everything between */
+  --ink: oklch(0.975 0 0);
+  --background: oklch(0.995 0 0);
+  --elevated: oklch(0.96 0 0);
+  --foreground: oklch(0.17 0 0);
+
+  --card: oklch(0.96 0 0);
+  --card-foreground: oklch(0.17 0 0);
+
+  --primary: oklch(0.17 0 0);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.93 0 0);
+  --secondary-foreground: oklch(0.17 0 0);
+
+  --muted: oklch(0.93 0 0);
+  --muted-foreground: oklch(0.42 0 0);
+
+  --accent: oklch(0.17 0 0);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.55 0.19 25);
+
+  /* "brass" now carries the black/grey accent role — name kept so every
+     component that references it (bg-brass, text-brass-gradient, …) just works */
+  --brass: oklch(0.17 0 0);
+  --brass-soft: oklch(0.38 0 0);
+  --brass-deep: oklch(0.05 0 0);
+  --sage: oklch(0.55 0 0);
+
+  --border: oklch(0.86 0 0);
+  --input: oklch(0.86 0 0);
+  --ring: oklch(0.17 0 0);
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Nav clearance for anchor jumps */
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    overflow-x: hidden;
   }
-  h1, h2, h3, h4 { font-family: var(--font-serif); letter-spacing: -0.01em; }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+  }
+
+  ::selection {
+    background: var(--brass);
+    color: var(--ink);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--ink);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.7 0 0);
+    border-radius: 99px;
+    border: 3px solid var(--ink);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--brass-deep);
+  }
+}
+
+@layer components {
+  /* ── Editorial labels ─────────────────────────────── */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* ── Film grain overlay ───────────────────────────── */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: -100%;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+    animation: grain-shift 6s steps(5) infinite;
+  }
+
+  /* ── Brass gradient text ──────────────────────────── */
+  .text-brass-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--brass-deep) 0%,
+      var(--brass-soft) 42%,
+      var(--brass) 68%,
+      var(--brass-deep) 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: brass-sweep 9s ease-in-out infinite;
+  }
+
+  /* ── Hairline dividers ────────────────────────────── */
+  .rule-fade {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-border) 18%,
+      var(--color-border) 82%,
+      transparent
+    );
+  }
+
+  /* ── Glass surface ────────────────────────────────── */
+  .glass {
+    background: color-mix(in oklab, var(--elevated) 62%, transparent);
+    backdrop-filter: blur(18px) saturate(1.3);
+    -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  }
+
+  /* ── Scroll reveal ────────────────────────────────────
+     Gated on `.js` (set by an inline script before paint) so the page is
+     fully visible if scripts fail or hydration is slow. Only use this for
+     below-the-fold content — it waits on hydration + IntersectionObserver,
+     which is invisible once a user has already scrolled to it, but would
+     read as a stuck/blank page if used above the fold. */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── Entrance animation ───────────────────────────────
+     Above-the-fold equivalent of .reveal: pure CSS, plays on paint, no
+     dependency on JS hydration or an observer ever firing. */
+  .enter {
+    animation: fade-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+
+  /* ── Marquee ──────────────────────────────────────── */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-slide var(--marquee-duration, 42s) linear infinite;
+  }
+  .marquee-host:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* ── Underline that draws in on hover ─────────────── */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 1px;
+    background: var(--brass);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* ── Arch plinth behind the portrait ──────────────────
+     Percentage radii so the dome stays proportional at any size. */
+  .arch {
+    border-radius: 50% 50% 1.25rem 1.25rem / 42% 42% 1.25rem 1.25rem;
+  }
+}
+
+@layer utilities {
+  .fluid-display {
+    font-size: clamp(3rem, 11vw, 9.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .fluid-heading {
+    font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  .text-balance-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* ── Keyframes ──────────────────────────────────────── */
+@keyframes grain-shift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-4%, 3%);
+  }
+  40% {
+    transform: translate(3%, -4%);
+  }
+  60% {
+    transform: translate(-3%, -3%);
+  }
+  80% {
+    transform: translate(4%, 2%);
+  }
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes brass-sweep {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes marquee-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes aurora-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(6%, -5%, 0) scale(1.12);
+  }
+  66% {
+    transform: translate3d(-5%, 4%, 0) scale(0.94);
+  }
+}
+
+@keyframes word-cycle {
+  0%,
+  22% {
+    opacity: 0;
+    transform: translateY(0.4em) rotate(1.5deg);
+  }
+  8%,
+  20% {
+    opacity: 1;
+    transform: none;
+  }
+  30%,
+  100% {
+    opacity: 0;
+    transform: translateY(-0.4em) rotate(-1.5deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
