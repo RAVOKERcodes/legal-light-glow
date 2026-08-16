@@ -48,50 +48,66 @@ export const Route = createFileRoute("/")({
 const cyclingWords = ["divorce", "custody", "maintenance", "succession"];
 
 const courts = [
+  "District Courts",
+  "Mediation Centers",
   "Supreme Court of India",
   "Delhi High Court",
-  "Family Courts, Delhi NCR",
-  "District Courts",
-  "Mediation Centres",
+  "Allahabad High Court",
+  "Bombay High Court",
+  "Gauhati High Court",
+  "Himachal Pradesh High Court",
+  "High Court of Jammu & Kashmir and Ladakh",
+  "Karnataka High Court",
+  "Punjab and Haryana High Court",
+  "Rajasthan High Court",
+  "Telangana High Court",
+  "Uttarakhand High Court",
+  "Family Courts",
 ];
 
 const practices = [
   {
+    icon: Users,
+    title: "Pre-Litigation Mediation",
+    desc: "Resolving disputes amicably outside the courtroom before formal litigation.",
+    span: "sm:col-span-2 lg:col-span-2",
+  },
+  {
     icon: Gavel,
-    title: "Divorce",
-    desc: "Contested and mutual-consent divorce, judicial separation and the full arc of matrimonial dispute resolution.",
-    span: "lg:col-span-2 lg:row-span-2",
+    title: "Divorce & Annulment",
+    desc: "Contested, mutual-consent divorce, and annulment proceedings.",
+    span: "sm:col-span-2 lg:col-span-2 lg:row-span-2",
     feature: true,
   },
   {
-    icon: Baby,
-    title: "Child Custody",
-    desc: "Custody, guardianship, visitation and international custody disputes.",
-    span: "lg:col-span-2",
+    icon: Scale,
+    title: "Alimony & Maintenance",
+    desc: "Securing interim and permanent financial support for spouses.",
+    span: "",
   },
   {
-    icon: Scale,
-    title: "Maintenance & Alimony",
-    desc: "Interim and permanent maintenance, alimony and settlement negotiation.",
+    icon: Baby,
+    title: "Child Custody & Visitations",
+    desc: "Handling custody, guardianship, and visitation rights.",
     span: "",
   },
   {
     icon: Shield,
     title: "Domestic Violence",
-    desc: "Protection, residence and monetary relief under the DV Act.",
+    desc: "Protection, residence, and monetary relief under the DV Act.",
+    span: "",
+  },
+  {
+    icon: Baby,
+    title: "Maintenance for Child",
+    desc: "Ensuring financial support and education expenses for children.",
     span: "",
   },
   {
     icon: BookOpen,
-    title: "Criminal Aspects of Family Law",
-    desc: "Section 498A, cruelty and dowry-related proceedings — defence and prosecution.",
-    span: "lg:col-span-2",
-  },
-  {
-    icon: FileText,
-    title: "Succession & Inheritance",
-    desc: "Wills, probate and letters of administration.",
-    span: "",
+    title: "Dowry Demand & Harassment",
+    desc: "Section 498A, cruelty and dowry-related proceedings.",
+    span: "sm:col-span-2 lg:col-span-2",
   },
   {
     icon: Users,
@@ -103,24 +119,48 @@ const practices = [
     icon: HomeIcon,
     title: "Property & Probate",
     desc: "Property disputes, estate planning and title due diligence.",
-    span: "sm:col-span-2 lg:col-span-4",
+    span: "",
+  },
+  {
+    icon: FileText,
+    title: "Succession & inheritance",
+    desc: "Legal representation for inheritance rights and succession.",
+    span: "sm:col-span-2 lg:col-span-2",
+  },
+  {
+    icon: Shield,
+    title: "Family Trust",
+    desc: "Creation and management of private family trusts.",
+    span: "",
+  },
+  {
+    icon: FileText,
+    title: "Registered Will",
+    desc: "Drafting, registration and execution of Wills.",
+    span: "",
+  },
+  {
+    icon: HomeIcon,
+    title: "Transfer of Property",
+    desc: "Legal processes for transferring real estate and assets.",
+    span: "sm:col-span-2 lg:col-span-2",
   },
 ];
 
 const process = [
   {
     step: "01",
-    title: "Confidential hearing",
+    title: "Confidential Consultation",
     desc: "A private first conversation — the facts, the timeline, and what you actually want from the outcome.",
   },
   {
     step: "02",
-    title: "Case assessment",
+    title: "Case Assessment",
     desc: "An honest read of merits, exposure and cost, with the realistic routes laid side by side.",
   },
   {
     step: "03",
-    title: "Strategy & filing",
+    title: "Strategy & Filing",
     desc: "Pleadings drafted, forum chosen, and a plan built around leverage rather than volume.",
   },
   {
@@ -131,10 +171,10 @@ const process = [
 ];
 
 const credentials = [
-  "Enrolled with the Bar Council of Delhi",
-  "Practising before the Supreme Court of India",
+  "Enrolled with the Bar Council of Maharashtra",
+  "Practising before High Courts and the Supreme Court of India",
   "Private international law & cross-border family disputes",
-  "Civil, criminal, consumer and real-estate litigation",
+  "Matrimonial, Arbitration, Mediation, Civil, Criminal, Consumer and Real-Estate Litigation",
 ];
 
 /* ── Kinetic hero word ────────────────────────────────── */
@@ -300,12 +340,13 @@ function Home() {
         {/* Hero footer strip */}
         <div className="relative z-10 border-t border-border/60">
           {/* px-1 + cell px-5 lines these up with the px-6 gutter above */}
-          <div className="mx-auto grid max-w-[86rem] grid-cols-2 divide-x divide-border/60 px-1 sm:grid-cols-4">
+          <div className="mx-auto grid max-w-[86rem] grid-cols-2 divide-x divide-border/60 px-1 sm:grid-cols-3 lg:grid-cols-5">
             {[
               { k: "12+", v: "Years in practice" },
-              { k: "500+", v: "Matters handled" },
+              { k: "2014", v: "practicing since" },
               { k: "SC", v: "Supreme Court of India" },
-              { k: "NCR", v: "High & District Courts" },
+              { k: "HC & Tribunals", v: "All High Courts & Tribunals" },
+              { k: "District Courts", v: "Civil, Magistrate, Sessions Courts" },
             ].map((s) => (
               <div key={s.v} className="px-5 py-6">
                 <div className="font-display text-3xl text-brass sm:text-4xl">{s.k}</div>
@@ -398,8 +439,8 @@ function Home() {
                 <div className="mt-14 grid grid-cols-2 gap-8 border-t border-border pt-10 sm:grid-cols-3">
                   {[
                     { n: 12, suffix: "+", label: "Years of practice" },
-                    { n: 500, suffix: "+", label: "Matters handled" },
-                    { n: 4, suffix: "", label: "Forums represented" },
+                    { n: 2014, suffix: "", label: "practicing since" },
+                    { n: 26, suffix: "", label: "team members" },
                   ].map((s) => (
                     <div key={s.label}>
                       <div className="font-display text-5xl text-foreground sm:text-6xl">
@@ -581,9 +622,9 @@ function Home() {
 /* ── Contact ──────────────────────────────────────────── */
 
 const contactDetails = [
-  { icon: Mail, label: "Email", value: "chambers@alkanupursingh.in" },
-  { icon: Phone, label: "Phone", value: "+91 · By appointment" },
-  { icon: MapPin, label: "Chambers", value: "Delhi NCR · Supreme Court · High Court" },
+  { icon: Mail, label: "Email", value: "contact@alkanupursingh.com" },
+  { icon: Phone, label: "Phone", value: "+91 9311277288" },
+  { icon: MapPin, label: "Chambers", value: "Chamber No. 464, Old Lawyers Chambers, Block-1, Delhi High Court, New Delhi 110003" },
 ];
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -599,8 +640,6 @@ const fieldClass =
   "w-full rounded-lg border border-border bg-background/60 px-4 py-3.5 text-sm text-foreground outline-none transition-colors duration-300 placeholder:text-muted-foreground/50 focus:border-brass/70 focus:bg-background";
 
 function ContactSection() {
-  const [sent, setSent] = useState(false);
-
   return (
     <section id="contact" className="relative py-24 sm:py-32 lg:py-40">
       <div className="mx-auto max-w-[86rem] px-6">
@@ -633,7 +672,7 @@ function ContactSection() {
                     </span>
                     <div className="min-w-0">
                       <div className="eyebrow text-[0.5625rem] text-muted-foreground">{label}</div>
-                      <div className="truncate text-sm font-medium text-foreground">{value}</div>
+                      <div className="text-balance text-sm font-medium leading-relaxed text-foreground">{value}</div>
                     </div>
                   </div>
                 ))}
@@ -646,83 +685,73 @@ function ContactSection() {
               <div className="relative overflow-hidden rounded-3xl border border-border bg-elevated/60 p-7 backdrop-blur-sm sm:p-10">
                 <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-brass/10 blur-3xl" />
 
-                {sent ? (
-                  <div className="relative flex min-h-[26rem] flex-col items-start justify-center">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full border border-brass/40 bg-brass/10 text-brass">
-                      <Check className="h-6 w-6" />
-                    </span>
-                    <h3 className="mt-7 font-display text-4xl">Message received.</h3>
-                    <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                      Thank you — the Chambers will be in touch shortly at the contact details you
-                      provided.
-                    </p>
-                    <button
-                      onClick={() => setSent(false)}
-                      className="link-underline mt-8 text-sm text-brass"
-                    >
-                      Send another note
-                    </button>
-                  </div>
-                ) : (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setSent(true);
-                    }}
-                    className="relative space-y-5"
-                  >
-                    <div className="grid gap-5 sm:grid-cols-2">
-                      <Field label="Full name">
-                        <input required placeholder="Your name" className={fieldClass} />
-                      </Field>
-                      <Field label="Email">
-                        <input
-                          required
-                          type="email"
-                          placeholder="you@example.com"
-                          className={fieldClass}
-                        />
-                      </Field>
-                    </div>
+                <form
+                  action="https://formsubmit.co/contact@alkanupursingh.com"
+                  method="POST"
+                  className="relative space-y-5"
+                >
+                  {/* FormSubmit config — disable captcha, set subject, redirect back */}
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_subject" value="New consultation enquiry — Chambers of Alka Nupur Singh" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input type="hidden" name="_next" value="https://alkanupursingh.com/#contact" />
 
-                    <div className="grid gap-5 sm:grid-cols-2">
-                      <Field label="Phone">
-                        <input placeholder="Optional" className={fieldClass} />
-                      </Field>
-                      <Field label="Matter type">
-                        <select className={fieldClass} defaultValue="">
-                          <option value="" disabled>
-                            Select an area
-                          </option>
-                          {practices.map((p) => (
-                            <option key={p.title} value={p.title}>
-                              {p.title}
-                            </option>
-                          ))}
-                        </select>
-                      </Field>
-                    </div>
-
-                    <Field label="Your matter">
-                      <textarea
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <Field label="Full name">
+                      <input required name="name" placeholder="Your name" className={fieldClass} />
+                    </Field>
+                    <Field label="Email">
+                      <input
                         required
-                        rows={5}
-                        placeholder="Briefly describe the situation and what you need."
-                        className={`${fieldClass} resize-none`}
+                        type="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        className={fieldClass}
                       />
                     </Field>
+                  </div>
 
-                    <button className="group flex w-full items-center justify-center gap-2.5 rounded-full bg-brass px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-all duration-300 hover:bg-brass-soft hover:shadow-[0_16px_44px_-16px_var(--brass)]">
-                      Request consultation
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </button>
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <Field label="Phone">
+                      <input name="phone" placeholder="Optional" className={fieldClass} />
+                    </Field>
+                    <Field label="Matter type">
+                      <select name="matter_type" className={fieldClass} defaultValue="">
+                        <option value="" disabled>
+                          Select an area
+                        </option>
+                        {practices.map((p) => (
+                          <option key={p.title} value={p.title}>
+                            {p.title}
+                          </option>
+                        ))}
+                      </select>
+                    </Field>
+                  </div>
 
-                    <p className="text-center text-xs leading-relaxed text-muted-foreground/70">
-                      Your enquiry is treated as confidential. Submitting this form does not create
-                      an advocate–client relationship.
-                    </p>
-                  </form>
-                )}
+                  <Field label="Your matter">
+                    <textarea
+                      required
+                      name="message"
+                      rows={5}
+                      placeholder="Briefly describe the situation and what you need."
+                      className={`${fieldClass} resize-none`}
+                    />
+                  </Field>
+
+                  <button
+                    type="submit"
+                    className="group flex w-full items-center justify-center gap-2.5 rounded-full bg-brass px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-all duration-300 hover:bg-brass-soft hover:shadow-[0_16px_44px_-16px_var(--brass)]"
+                  >
+                    Request consultation
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </button>
+
+                  <p className="text-center text-xs leading-relaxed text-muted-foreground/70">
+                    Your enquiry is treated as confidential. Submitting this form does not create
+                    an advocate–client relationship.
+                  </p>
+                </form>
               </div>
             </Reveal>
           </div>

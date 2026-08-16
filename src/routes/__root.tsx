@@ -112,15 +112,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="js">
       <head>
-        {/* Runs before paint: scroll-reveal styles only apply when JS is alive,
-            so a failed bundle degrades to a fully visible page. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
-          }}
-        />
         <HeadContent />
       </head>
       <body>

@@ -31,49 +31,54 @@ export function SiteNav() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+          "fixed inset-x-0 top-0 z-50 px-4 transition-all duration-500 sm:px-6",
           scrolled ? "py-3" : "py-5",
         )}
       >
         <div
           className={cn(
-            "mx-auto flex max-w-[86rem] items-center justify-between gap-6 rounded-full px-5 py-2.5 transition-all duration-500 sm:px-6",
+            "mx-auto flex w-full max-w-[86rem] items-center rounded-full px-5 py-2.5 transition-all duration-500 sm:px-6",
             scrolled
-              ? "glass mx-4 border border-border/70 shadow-[0_18px_50px_-24px_rgba(0,0,0,0.9)] sm:mx-6"
-              : "mx-4 border border-transparent sm:mx-6",
+              ? "glass border border-border/70 shadow-[0_18px_50px_-24px_rgba(0,0,0,0.9)]"
+              : "border border-transparent",
           )}
         >
-          <a href="#top" className="group flex items-center gap-3">
-            <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-brass/40 bg-brass/10">
-              <span className="font-display text-base leading-none text-brass">A</span>
-              <span className="absolute inset-0 rounded-full border border-brass/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </span>
-            <span className="leading-tight">
-              <span className="block font-display text-[1.1rem]">
-                Alka Nupur Singh
-              </span>
-              <span className="eyebrow block text-[0.5625rem] text-muted-foreground">
-                Chambers · Advocate
-              </span>
-            </span>
-          </a>
+          {/* Left — nav links */}
+          <div className="flex flex-1 items-center justify-start">
+            <nav className="hidden items-center gap-6 md:flex lg:gap-9">
+              {links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="link-underline group flex items-baseline gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <span className="eyebrow text-[0.5625rem] text-brass/60 transition-colors group-hover:text-brass">
+                    {link.index}
+                  </span>
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
 
-          <nav className="hidden items-center gap-9 md:flex">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="link-underline group flex items-baseline gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <span className="eyebrow text-[0.5625rem] text-brass/60 transition-colors group-hover:text-brass">
-                  {link.index}
+          {/* Center — logo */}
+          <div className="flex flex-auto items-center justify-center md:flex-1">
+            <a href="#top" className="group flex items-center gap-3">
+              <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-brass/40 bg-brass/10">
+                <span className="font-display text-base leading-none text-brass">A</span>
+                <span className="absolute inset-0 rounded-full border border-brass/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </span>
+              <span className="leading-tight">
+                <span className="block font-display text-[1.1rem]">Alka Nupur Singh</span>
+                <span className="eyebrow block text-[0.5625rem] text-muted-foreground">
+                  Chambers · Advocate
                 </span>
-                {link.label}
-              </a>
-            ))}
-          </nav>
+              </span>
+            </a>
+          </div>
 
-          <div className="flex items-center gap-2">
+          {/* Right — consult button */}
+          <div className="flex flex-1 items-center justify-end gap-2">
             <a
               href="#contact"
               className="group hidden items-center gap-2 rounded-full bg-brass px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-all duration-300 hover:bg-brass-soft sm:inline-flex"
