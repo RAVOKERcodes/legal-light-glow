@@ -4,11 +4,10 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // targets Cloudflare via the lovable config's own default preset.
 const isGithubPages = process.env.GITHUB_PAGES === "true";
 
-// GitHub Actions sets GITHUB_REPOSITORY to "owner/repo" — derive the Pages
-// project-page base path ("/repo/") from it so this doesn't silently break
-// if the repo is ever renamed. Falls back to the current repo name for local
-// GITHUB_PAGES=true test builds, where that env var isn't set.
-const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "legal-light-glow";
+// The site is served from the custom domain alkanupursingh.com (see
+// public/CNAME), so Pages serves it at the domain root rather than under
+// /<repo>/ — the base path is plain "/".
+const basePath = "/";
 
 export default defineConfig({
   tanstackStart: {
@@ -26,9 +25,7 @@ export default defineConfig({
     // server-only data dependencies, so pure CSR is a fine fit.
     ...(isGithubPages && { spa: { enabled: true } }),
   },
-  // Project page (not a <user>.github.io root page), so it's served from
-  // /<repo>/ rather than the domain root.
-  ...(isGithubPages && { vite: { base: `/${repoName}/` } }),
+  ...(isGithubPages && { vite: { base: basePath } }),
   // Nitro's build targets a live server runtime (Cloudflare Worker, Node,
   // …) — none of which exist on GitHub Pages, so skip it and publish the
   // plain client bundle instead.
